@@ -1,16 +1,19 @@
+buildscript {
+    repositories {
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots'
+        }
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.sourcemuse.gradle.plugin:gradle-mongo-plugin:0.6.0-SNAPSHOT'
+    }
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'mongo'
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.sourcemuse.gradle.plugin:gradle-mongo-plugin:0.5.0'
-        //classpath files('libs/gradle-mongo-plugin-all-0.5.0-SNAPSHOT.jar')
-    }
-}
 
 repositories {
     mavenCentral()
@@ -21,6 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-test {
-    dependsOn startManagedMongoDb
+task integrationTest(type: Test) {
+    withMongoDbRunning()
 }
