@@ -1,4 +1,4 @@
-package org.sourcemuse.gradle.plugin.test;
+package com.sourcemuse.gradle.plugin.test;
 
 import com.mongodb.*;
 import org.junit.Test;
