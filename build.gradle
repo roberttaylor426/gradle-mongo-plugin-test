@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.sourcemuse.gradle.plugin:gradle-mongo-plugin:0.9.0-SNAPSHOT'
+        classpath 'com.sourcemuse.gradle.plugin:gradle-mongo-plugin:0.10.0-SNAPSHOT'
     }
 }
 
@@ -25,5 +25,5 @@ dependencies {
 }
 
 task integrationTest(type: Test) {
-    requiresMongoDb = true
+    runWithMongoDb = true
 }
