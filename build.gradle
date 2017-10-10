@@ -1,18 +1,9 @@
-buildscript {
-    repositories {
-        maven {
-            url 'https://oss.sonatype.org/content/repositories/snapshots'
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.sourcemuse.gradle.plugin:gradle-mongo-plugin:0.11.0'
-    }
+plugins {
+    id 'com.sourcemuse.mongo' version '1.0.3'
 }
 
 apply plugin: 'java'
 apply plugin: 'idea'
-apply plugin: 'mongo'
 
 
 repositories {
