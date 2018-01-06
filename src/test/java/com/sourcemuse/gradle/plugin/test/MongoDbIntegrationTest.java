@@ -1,6 +1,9 @@
 package com.sourcemuse.gradle.plugin.test;
 
 import com.mongodb.*;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import org.bson.Document;
 import org.junit.Test;
 
 import java.net.UnknownHostException;
@@ -12,17 +15,14 @@ public class MongoDbIntegrationTest {
 
     @Test
     public void saveAndLoadAnObject() {
-        BasicDBObject basicDBObject = new BasicDBObject();
-        basicDBObject.append("key", "value");
-        try {
-            MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
-            DB db = mongoClient.getDB("test");
-            DBCollection dbCollection = db.createCollection("test-collection", basicDBObject);
-            dbCollection.insert(basicDBObject);
-            DBObject dbObject = dbCollection.findOne();
-            assertThat(basicDBObject, equalTo(dbObject));
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
+        Document document = new Document();
+        document.append("key", "value");
+        MongoClient mongoClient = new MongoClient("127.0.0.1", 27017);
+        MongoDatabase db = mongoClient.getDatabase("test");
+        db.createCollection("test-collection");
+        MongoCollection<Document> collection = db.getCollection("test-collection");
+        collection.insertOne(document);
+        Document dbObject = collection.find().first();
+        assertThat(document, equalTo(dbObject));
     }
 }
